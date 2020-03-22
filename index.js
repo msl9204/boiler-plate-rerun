@@ -3,9 +3,9 @@ const app = express();
 const port = 5000;
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const config = require("./config/key");
-const { auth } = require("./middleware/auth");
-const { User } = require("./models/User");
+const config = require("./server/config/key");
+const { auth } = require("./server/middleware/auth");
+const { User } = require("./server/models/User");
 
 // application/x-www-form-urlencoded로 된 데이터를 분석해서 가져올 수 있게 해주는 것.
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,6 +25,10 @@ mongoose
     .catch(err => console.log(err));
 
 app.get("/", (req, res) => res.send("Hello World!"));
+
+app.get("/api/hello", (req, res) => {
+    res.send("안녕하세요~");
+});
 
 app.post("/api/users/register", (req, res) => {
     // 회원가입 할때 필요한 정보들을 Client에서 가져오면
